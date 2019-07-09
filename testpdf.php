@@ -1,4 +1,5 @@
 <?php
+//code for the pdf generated in the user profile
 session_start();
 include('connect.php');
 require('fpdf.php');
