@@ -22,9 +22,7 @@ echo "<div >";
 if(isset($_POST['submit'])){
     $email = $_POST["email"];
     $password = $_POST["password"];
-    //$password = 'johns';
-    //$sql = "SELECT * FROM person where email = 'rjohns@example.org'";
-    //if('rjohns@example.org' == $email) echo "they equal wtf";
+    
     $sql = "SELECT * FROM person where email = '".$email."' AND password='".$password."'";
     $result = mysqli_query($link, $sql); // First parameter is just return of "mysqli_connect()" function
     echo "<br>";
@@ -33,7 +31,7 @@ if(isset($_POST['submit'])){
         $rowcount=mysqli_num_rows($result);
         if($rowcount >0){
             echo "acount found".$rowcount;
-            while ($row = mysqli_fetch_assoc($result)) { // Important line !!! Check summary get row on array ..
+            while ($row = mysqli_fetch_assoc($result)) { 
                 echo "first name".$row['fname'];
                 $_SESSION['active']= true;
                 $_SESSION['cart']= array();
