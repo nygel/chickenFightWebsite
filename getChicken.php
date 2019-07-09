@@ -1,4 +1,5 @@
 <?php
+//opening this page while logged in will add a randomly generated chicken with the name Meeps to the user's account
 session_start();
 include("connect.php");
 include("top.php");
