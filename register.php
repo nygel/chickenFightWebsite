@@ -1,4 +1,5 @@
 <?php
+//create new user account for the website
 session_start();
 include("connect.php");
 include("top.php");
