@@ -1,4 +1,7 @@
 <?php
+//search page of for event 
+//displays events and their quick summaries grouped by decade
+//clicking on event's name redirects to the event's information
 include('connect.php');
 include('top.php');
 ?>
