@@ -1,4 +1,5 @@
 <?php
+//page to search for chickens or people
 include('connect.php');
 include('top.php');
 ?>
