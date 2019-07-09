@@ -1,4 +1,5 @@
 <?php
+//displays the logged in user's chickens
 session_start();
 include("connect.php");
 include("top.php");
@@ -7,19 +8,14 @@ include("top.php");
 <?php
 if(isset($_SESSION['active'])){
     echo $_SESSION['id'];
-  /*  $sql = "SELECT c.cname,c.id
-        FROM chicken c 
-        where 
-        (c.personID = '".$_SESSION['id']."')  
-        ";
-   */
+
     $sql = "select e.ename, c.cname from event e, fight f, chicken c
         where
         (c.personID = '".$_SESSION['id']."')  
        and (f.chick1 = c.id or f.chick2 = c.id)
        and f.eventID = e=id
         "; 
-    $result = mysqli_query($link, $sql); // First parameter is just return of "mysqli_connect()" function
+    $result = mysqli_query($link, $sql); 
     echo "<br>";
     echo "<h3>CHICKENS ".$_SESSION['fname']." OWN";
     echo "<table border='1'>";
