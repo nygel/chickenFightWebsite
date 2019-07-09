@@ -1,7 +1,8 @@
 <?php
+//person public profile page
 include("top.php");
 include("connect.php");
-//chicken info
+
 echo "<br><div id='login'>";
 echo "<h3>Person Public Info </h3>";
 $sql = "SELECT * FROM person where id = ".$_GET['t']." ";
@@ -11,9 +12,8 @@ echo "<b>Name: </b> ".$row['fname']." ".$row['lname'];
 echo "<b><br>Contact Me At<br>Email: </b> ".$row['email']." <br>";
 echo "<b>Phone: </b> ".$row['phone']." <br>";
 
-//$sql = "SELECT c.pic,c.cname,c.tier,c.rank,c.health,c.attack,c.defense FROM chicken c where personID = '".$_GET['t']."' ";
 $sql = "SELECT * FROM chicken c where personID = '".$_GET['t']."' ";
-$result = mysqli_query($link, $sql); // First parameter is just return of "mysqli_connect()" function
+$result = mysqli_query($link, $sql);
 echo "<h3>CHICKENS OWNED";
 echo "<table >";
 if($result){
@@ -55,7 +55,7 @@ if($result){
         echo "<tr><th>Event Name</th><th>Event Date</th><th>Chicken 1</th><th>Chicken 2 </th><th>Result</th></tr>";
         while ($row = mysqli_fetch_assoc($result)) { // 
             echo "<tr>";
-            foreach ($row as $field => $value) { //  foreach($row as $value) {
+            foreach ($row as $field => $value) { 
                 echo "<td>" . $value . "</td>";  
             }
             echo "</tr>";
