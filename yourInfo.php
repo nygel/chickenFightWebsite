@@ -1,8 +1,6 @@
 <?php
-//logged in user's prersonal profile which displays events won, participated and lost and stats
-//displays user's information, their chickens' information
-//has links for getting a new chicken, public profiles for both chicken and user and pdf which is a 
-//summary of information on this page
+
+//show logged in user's information
 session_start();
 include("connect.php");
 include("top.php");
@@ -19,14 +17,7 @@ if(isset($_SESSION['active'])){
         $rowcount=mysqli_num_rows($result);
         if($rowcount >0){
             while ($row = mysqli_fetch_assoc($result)) { // 
-               /* echo "<tr><th>First Name</th><th>Last Name</th></tr>";
-                echo "<tr><td>".$row['fname']."</td><td>".$row['lname']."</td></tr>
-                    <tr><th>Birthdate</th><td>".$row['dob']."</td></tr>
-                    <tr><th>Phone</th><td>".$row['phone']."</td>
-                    <th>Email</th><td>".$row['email']."</td></tr>
-                    <tr><th col = 2><a href ='getChicken.php'>Get Chicken</a></th></tr>
-                    <tr><th col = 2><a href='edit.php'>Edit Account Information</a></th></tr>";
-                */
+              
                 echo "<p><b>Name:</b> ".$row['fname']." ".$row['lname']."</p>
                     <p><b>Birthdate:</b> ".$row['dob ']."</p>
                     <p><b>Contact<br>Email:</b> ".$row['email']."<br><b>Phone:</b>".$row['phone']."</p>
