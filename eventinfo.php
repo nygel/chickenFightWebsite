@@ -20,17 +20,13 @@ $today = date("Y-m-d");
 $today_dt = new DateTime($today);
 $expire_dt = new DateTime($row['endDate']);
 //fight list
-//echo $today." ".$row['endDate'];
+
 if($today < $row['endDate'])echo "before current Date</table></div>";
 else echo "after current Date</table></div>";
 echo "<div id='b3'>";
 echo "<h3>FIGHTS</h3> ";
 echo "<table >";
-//$sql = "SELECT chick1,chick2,result FROM fight where eventID = ".$_GET['eid']." ";
-/*$sql = "SELECT c.name FROM chicken as c 
-    inner join fight as f
-on (f.chick1=c.id or f.chick2=c.id or f.result=c.id ) and f.eventID = ".$_GET['eid']." ";
- */
+
 
 $sql = "SELECT 
     c1.id as c1i, c1.pic as c1p, c1.cname as chicken1,c1.tier as c1t, c1.rank as c1r, c1.health as c1h, c1.defense as c1d, c1.attack as c1a, 
@@ -53,11 +49,7 @@ $w=0;
 if($rowcount >0){
     while($row = mysqli_fetch_assoc($result)){
 
-        //   foreach ($row as $field => $value) { //  foreach($row as $value) {
-        // echo "<td>" . $value . "</td>";  
-
-        echo "<td><details>";
-        //echo "<a href='shop.php?'><h3>Return</h3></a><br>"; 
+        echo "<td><details>";     
         echo "<summary><img src='".$row['c1p']."'height=90 width=90> ".$row['chicken1']."</summary>";
         echo "<p>Tier: ".$row['c1t']." Rank: ".$row['c1r']."</p>";
         echo "<p>Health: ".$row['c1h']." Defense: ".$row['c1d']." Attack ".$row['c1a']."</p>";
@@ -80,14 +72,13 @@ if($rowcount >0){
     echo "</table>";
 }
 //waitList
-//if ($expire_dt > $today_dt) { 
+
 else if($today < $row['endDate']){
     //else{
     echo"<a href='chickenRegister.php?eid=".$_GET['eid']."'>Register</a>  |";
     echo "<a href='addFighters.php?eid=".$_GET['eid']."'>Add Fighters</a>  |";
     echo "<a href='pairFighters.php?eid=".$_GET['eid']."'>Pair Fighters</a>";
 
-    //  echo "</table></div><div id='b3'>";
     echo "<h3>FIGHTERS</h3> ";
     echo "<table >";
     $sql = "SELECT Ch.cname,Ch.tier, Ch.health, Ch.attack, Ch.defense 
@@ -99,14 +90,14 @@ $rowcount=mysqli_num_rows($result);
 echo "<tr><th>Chicken name</th><th>Tier</th><th>Health</th><th>Attack</th><th>Defense</th></tr>";
 echo "<tr>";
 while($row = mysqli_fetch_assoc($result)){
-    foreach ($row as $field => $value) { //  foreach($row as $value) {
+    foreach ($row as $field => $value) { 
         echo "<td>" . $value . "</td>";  
     }
     echo "</tr>";
 }
 
 echo "</table>";
-//}
+
 echo "</table> </div>";
 }
 ?>
