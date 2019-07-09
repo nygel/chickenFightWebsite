@@ -1,4 +1,6 @@
 <?php
+//login page where one can sign in or head to registration page
+//will redirect to home page if logged in
 session_start();
 include("connect.php");
 include("top.php");
@@ -24,7 +26,7 @@ if(isset($_POST['submit'])){
     $password = $_POST["password"];
     
     $sql = "SELECT * FROM person where email = '".$email."' AND password='".$password."'";
-    $result = mysqli_query($link, $sql); // First parameter is just return of "mysqli_connect()" function
+    $result = mysqli_query($link, $sql); 
     echo "<br>";
     echo "<table >";
     if($result){
