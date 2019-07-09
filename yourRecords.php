@@ -1,4 +1,8 @@
 <?php
+//logged in user's prersonal profile which displays events won, participated and lost and stats
+//displays user's information, their chickens' information
+//has links for getting a new chicken, public profiles for both chicken and user and pdf which is a 
+//summary of information on this page
 session_start();
 include("connect.php");
 include("top.php");
@@ -6,7 +10,7 @@ include("top.php");
 <?php
 if(isset($_SESSION['active'])){
     $sql = "SELECT c.pic,c.cname,c.tier,c.rank,c.health,c.attack,c.defense FROM chicken c where personID = '".$_SESSION['id']."' ";
-    $result = mysqli_query($link, $sql); // First parameter is just return of "mysqli_connect()" function
+    $result = mysqli_query($link, $sql); 
     echo "<br><div id='b3'>";
     echo "<h3>CHICKENS ".$_SESSION['fname']." OWN";
     echo "<table >";
@@ -17,8 +21,7 @@ if(isset($_SESSION['active'])){
             echo"<tr><th>pic</th><th>Name</th><th>Tier</th><th>Rank</th><th>Health</th><th>Attack</th><th>Defense</th></tr>";
             while ($row = mysqli_fetch_assoc($result)) { // 
                 echo "<tr>";
-                //foreach ($row as $field => $value) { //  foreach($row as $value) {
-                //}
+             
                     echo "<td><img src='" . $row['pic'] . "' height='75' width='75' ></td>";  
                     echo "<td>".$row['cname']."</td>";  
                     echo "<td>".$row['tier']."</td>";  
@@ -39,16 +42,7 @@ echo"<div id='b3'>";
 
 if(isset($_SESSION['active'])){
     //fights==================================================
-    //(chicken.id = 3  or chicken.id = 103  or chicken.id = 203)  
-/*    $sql = "select event.ename,event.endDate, fight.chick1,fight.chick2,fight.result  
-        from fight, chicken, event 
-        where
-        (chicken.personID = '".$_SESSION['id']."')  
-        and 
-        (fight.chick1 = chicken.id or fight.chick2 = chicken.id)
-        and
-        (fight.eventID = event.id)";
- */
+
 $sql = "SELECT e.ename, e.endDate, c1.cname as chicken1, c2.cname as chicken2, c3.cname as chicken3
     FROM fight f 
     inner join chicken c1 on (f.chick1 = c1.id ) 
@@ -69,7 +63,7 @@ if($result){
             echo "<tr><th>Event Name</th><th>Event Date</th><th>Chicken 1</th><th>Chicken 2 </th><th>Result</th></tr>";
         while ($row = mysqli_fetch_assoc($result)) { // 
             echo "<tr>";
-            foreach ($row as $field => $value) { //  foreach($row as $value) {
+            foreach ($row as $field => $value) { 
                 echo "<td>" . $value . "</td>";  
             }
             echo "</tr>";
@@ -100,12 +94,10 @@ if($result){
             echo "</tr>";
         }
     }else echo"</div>";
-     //   echo "No wins found<br>";
+   
 }
 echo "</table>";
-//(chicken.id = 3  or chicken.id = 103  or chicken.id = 203)  
-//(chicken.personID = '".$_SESSION['id']."')  
-//and (award.winner = chicken.id)";
+
 echo "<br>";
 echo "<h3> AWARDS ".$_SESSION['fname']."'S CHICKEN RECIEVED";
 echo "<table>";
@@ -119,12 +111,12 @@ where
 echo "<table border='1'>";
 $result = mysqli_query($link, $sql);
 $rowcount=mysqli_num_rows($result);
-//echo "<br>found ".$rowcount."<br>";
+
 if($result){
     if($rowcount >0){
         while ($row = mysqli_fetch_assoc($result)) { // 
             echo "<tr>";
-            foreach ($row as $field => $value) { //  foreach($row as $value) {
+            foreach ($row as $field => $value) {
                 echo "<td>" . $value . "</td>";  
             }
             echo "</tr>";
@@ -154,12 +146,6 @@ echo "<tr><td><a href='testpdf.php'>PDF</a></td></tr>";
 echo "</table> </div>";
 ///upcoming================================================
 
-/*$sql="select c.id, e.name, e.endDate from waitList w, chicken c,person p, event e where 
- (p.id = '".$_SESSION['id']."') and
- (p.id = c.personID) and
- (c.id = w.chickenID) and
- (w.eventID = e.id)";
- */
 $sql = "select e.ename, e.endDate, c3.cname from waitList w
     inner join chicken c3 on (w.chickenID = c3.id)  
     inner join event e on (w.eventID = e.id) 
