@@ -1,22 +1,11 @@
 <?php
-//pair fighters from waitlist
+//pair fighters from waitlist, remove the waitlist, and create fights for the same event and generate results
 include("top.php");
 include("connect.php");
 $eid = $_GET['eid'];
 
 echo "yo";
-/*$sql = " insert into fight (eventID,chick1,chick2,result,endTime,startTime)
-        select 
-        '54', w1.chickenID, w2.chickenID,if(rand()*10 >5,w1.chickenID,w2.chickenID)
-        ,'08:00:00','09:00:00'
-        from waitList w1, waitList w2
-        where 
-        (w1.eventID = 54 and w2.eventID = 54)
-        and w1.chickenID != w2.chickenID
-        and mod(w1.id,2) = 1
-        and w1.id = w2.id +1 
-       
-";*/
+
 $sql = "insert into fight (eventID, chick1,chick2,result,endTime,startTime)
 select '".$eid."', w1.chickenID, w2.chickenID, if(rand()*10>5,w1.chickenID,w2.chickenID),'08:00:00','09:00:00'
 from waitList w1, waitList w2 
