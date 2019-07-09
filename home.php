@@ -1,4 +1,6 @@
 <?php
+//if not logged in shows welcome sign that leads back to login page and top chickens and upcoming events for the year
+//if logged in shows users upcoming fight + unloggined information minus the welcome sign
 session_start();
 include('top.php');
 include('connect.php');
@@ -21,7 +23,6 @@ else{
 //top chickens query
 $sql = "SELECT * from chickenTop";
 $result = mysqli_query($link, $sql); 
-//echo "<br><div id='b1'>";
 echo "<br><div id='b3' >";
 echo "<h3>TOP CHICKENS BY RANK</h3>";
 echo "<table >";
@@ -31,7 +32,7 @@ if($result){
         echo"<tr><th>Rank</th><th>Chicken Name</th><th>Tier</th><th>Health</th><th>Defense</th><th>Attack</th></tr>";
         while ($row = mysqli_fetch_assoc($result)) { // 
             echo "<tr>";
-            foreach ($row as $field => $value) { //  foreach($row as $value) {
+            foreach ($row as $field => $value) { 
                 echo "<td>" . $value . "</td>";  
             }
             echo "</tr>";
@@ -43,7 +44,7 @@ if($result){
 $sql = "SELECT poster, endDate,ename, endDate FROM event WHERE 
     year(endDate)=2019";
 
-//$sql = "SELECT * from eThisMonth";
+
 $result = mysqli_query($link, $sql); 
 echo "<div id='b3''>";
 echo "<h3>UPCOMING EVENTS FOR THIS YEAR</h3>";
@@ -51,12 +52,8 @@ echo "<table >";
 if($result){
     $rowcount=mysqli_num_rows($result);
     if($rowcount >0){
-       // echo "<tr><th>Event Name</th><th>Start Date</th></tr>";
         while ($row = mysqli_fetch_assoc($result)) { // 
-       //     echo "<tr>";
-      /* echo "<td> <img src='cf".$row['poster'].".png' width = 100 height =100></div></td> <td><a href='eventinfo.php?eid=".$row['id']."'><h3>".$row['ename']."</h3></a><td>".$row['endDate']."</td>"; 
-       //echo "</tr>";
-       */
+    
             echo "<p style ='float:left'> <img src='cf".$row['poster'].".png' width = 100 height =100 ></p><p style ='float:left'>
                 Event Name: <a href='eventinfo.php?eid=".$row['id']."'>".$row['ename']."</a> <br>Start Date: ".$row['endDate']."</p>"; 
        echo "<br style='clear:both'>";
