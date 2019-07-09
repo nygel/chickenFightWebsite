@@ -1,4 +1,5 @@
 <?php
+//code for the top section that is attached to each webpage
 session_start();
 echo"   <head>
      <title>Chicken Fight</title>
