@@ -1,4 +1,5 @@
 <?php
+//opening this page automatically adds randomly generated chickenfighters and put them in the event's waitlist 
 include("top.php");
 include("connect.php");
 echo "eid= ".$_GET['eid']."<br>";
@@ -31,16 +32,10 @@ $row = mysqli_fetch_assoc($result);
 echo "max id for event".$row['id'];
 for($x = $row['id']; $x < $row['id']/2; $x+=2){
     $sql = "insert into fight (id, eventID) values (max(id),'$eid')";
-
-    //$sql = "select chickenID from waitList where eventID='".$_GET['eid']."')";
     $result = mysqli_query($link, $sql); 
     $row = mysqli_fetch_assoc($result)
     $r = rand(1,300);
-    /*$sql = "insert into fight (chick1,chick2) 
-        select chickenID where id='".$x."'  
-        from waitList 
-        where eventID='".$_GET['eid']."' and id = '".$x."'";
-     */
+
     //sql insert into fight with max id and event id
     //then update to put in the chick1 and chic2
     $sql ="insert into fight (id,eventID)
