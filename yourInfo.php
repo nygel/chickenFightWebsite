@@ -1,4 +1,8 @@
 <?php
+//logged in user's prersonal profile which displays events won, participated and lost and stats
+//displays user's information, their chickens' information
+//has links for getting a new chicken, public profiles for both chicken and user and pdf which is a 
+//summary of information on this page
 session_start();
 include("connect.php");
 include("top.php");
